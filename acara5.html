@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Geospatial Mashup</title>
+
+        <!-- CSS Leaflet.js -->
+        <link rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <!-- JavaScript Leaflet.js -->
+        <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+        <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: sans-serif;
+        }
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+
+        <script>
+            // Inisialisasi peta pada elemen dengan id 'map'
+            // setVew([lat, lng], zoomLevel)
+            var mymap = L.map('map').setView([-6.241988, 106.628068], 15);
+
+            // Menambahkan basemap OpenStreetMap (gratis, tanpa API key)
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(mymap);
+
+            // Marker — objek titik
+            // L.marker([lat, lng]).addTo(map)
+            var marker = L.marker([-6.241560543637277, 106.627260453455])
+                            .addTo(mymap);
+
+            // Menambahkan popup pada marker
+            marker.bindPopup('<b>Molly Tea</b><br>Milk Tea terenak sedunia, rasanya kaya surga BANGET!');
+
+             // Marker — objek titik
+            // L.marker([lat, lng]).addTo(map)
+            var marker = L.marker([-6.234468697069829, 106.62546086397668])
+                            .addTo(mymap);
+
+            // Menambahkan popup pada marker
+            marker.bindPopup('<b>Rumah Ica</b><br>Ica tinggal di rumah ini.');
+
+            // Circle — objek lingkaran
+            // Parameter: koordinat pusat, opsi styling
+            var circle = L.circle([-6.237994, 106.628726], {
+                color: '#FF1493', // Warna garis tepi
+                fillColor: '#FFC0CB', // Warna isian
+                fillOpacity: 0.5, // Transparansi isian (0.0 – 1.0)
+                radius: 200 // Radius dalam meter
+            }).addTo(mymap);
+
+            circle.bindPopup('Radius 200 meter dari titik ini.');
+
+            // Polygon — objek area
+            // Parameter: array pasangan [lat, lng] tiap sudut poligon
+            var polygon = L.polygon([
+            [-6.2422612939917315, 106.62514993602286],
+            [-6.242835595577134, 106.62856384145022],
+            [-6.238443636920238, 106.63030813758394],
+            [-6.237657645247381, 106.62865148890819],
+            [-6.2408764608179865, 106.62774786235627],
+            [-6.2422612939917315, 106.62514993602286]
+            ], {
+                color: '#2E8B58', // Warna garis tepi
+                fillColor: '#00FF7F', // Warna isian
+                fillOpacity: 0.3 // Transparansi isian
+            }).addTo(mymap);
+
+            polygon.bindPopup('Summarecon Mall Serpong cintaku');
+
+            // Polyline — objek garis
+            // Parameter: array pasangan [lat, lng] tiap titik simpul garis
+            var polyline = L.polyline([
+            [-6.2349881169266865, 106.6252267607656],
+            [-6.235074238157196, 106.626158072939],
+            [-6.2363014641511825, 106.62596314713448],
+            [-6.237227264316701, 106.62847552415946],
+            [-6.240088751614692, 106.62743134993246]
+            ], {
+                color: '#FF0000', // Warna garis
+                weight: 3, // Ketebalan garis (px)
+                opacity: 0.8 // Transparansi garis
+            }).addTo(mymap);
+            
+            polyline.bindPopup('Jalur dari Rumah Ica ke SMS tercinta');
+        </script>
+    </body>
+</html>
